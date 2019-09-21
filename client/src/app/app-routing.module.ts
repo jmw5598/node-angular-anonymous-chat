@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ConnectedGuard } from 'src/app/core/guards/connected.guard';
+import { DisconnectedGuard } from './core/guards/disconnected.guard';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'connect',
+    canActivate: [DisconnectedGuard],
     loadChildren: './connect/connect.module#ConnectModule'
   },
   {

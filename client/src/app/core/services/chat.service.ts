@@ -3,8 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { SocketIoConfig, Socket } from 'ngx-socket-io';
 import { ChatUser } from 'src/app/shared/models/chat-user.model';
 import { ChatMessage } from 'src/app/shared/models/chat-message.model';
-import { CHATROOM_MOCK } from './chat-room.mock';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +11,7 @@ export class ChatService {
 
   private _socket: Socket;
   private _userSource: BehaviorSubject<ChatUser> = new BehaviorSubject<ChatUser>(null);
-  private _usersSource: BehaviorSubject<ChatUser[]> = new BehaviorSubject<ChatUser[]>(CHATROOM_MOCK.users);
+  private _usersSource: BehaviorSubject<ChatUser[]> = new BehaviorSubject<ChatUser[]>([]);
   private _messageSource: BehaviorSubject<ChatMessage> = new BehaviorSubject<ChatMessage>(null);
 
   public user: Observable<ChatUser> = this._userSource.asObservable();
@@ -24,11 +22,12 @@ export class ChatService {
     const user: ChatUser = JSON.parse(localStorage.getItem("user"));
     console.log(user);
     this._userSource.next(user);
+    if (user) this.connect(user);
   }
 
   connect(user: ChatUser) {
     const config: SocketIoConfig = { 
-      url: 'http://localhost:3000', 
+      url: 'http://192.168.1.46:3000', 
       options: { 
         query: { user: JSON.stringify(user) } }
       };

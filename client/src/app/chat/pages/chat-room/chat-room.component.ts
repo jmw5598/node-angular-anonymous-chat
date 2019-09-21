@@ -12,7 +12,7 @@ import { ChatUser } from 'src/app/shared/models/chat-user.model';
 export class ChatRoomComponent implements OnInit {
   
   public user: ChatUser;
-  public users: Observable<ChatUser[]>;
+  public users: ChatUser[];
   public messages: ChatMessage[] = [];
 
   constructor(
@@ -21,7 +21,7 @@ export class ChatRoomComponent implements OnInit {
 
   ngOnInit() {
     this._chatService.user.subscribe(user => this.user = user);
-    this.users = this._chatService.users;
+    this._chatService.users.subscribe(users => this.users = users);
     this._chatService.message.subscribe(message => this.messages.push(message));
   }
 

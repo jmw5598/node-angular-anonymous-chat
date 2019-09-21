@@ -7,11 +7,13 @@ const logger = require('morgan');
 const cors = require('cors');
 
 const router = require('./routes');
+const socketServer = require('./sockets');
 
 class Server {
 
   constructor() {
     this.server = express();
+    this.socket = socketServer;
   }
 
   setup(config) {
@@ -41,15 +43,17 @@ class Server {
       res.status(err.status || 500);
       res.render('error');
     });
-
   }
 
   start() {
     let hostname = this.server.get('hostname');
     let port = this.server.get('port');
-    this.server.listen(port, () => {
+    this.http = this.server.listen(port, () => {
       console.log('Express server listening on - http://' + hostname + ':' + port);
     });
+
+    this.socket.setup(this.http);
+    this.socket.start();
   }
 
 }

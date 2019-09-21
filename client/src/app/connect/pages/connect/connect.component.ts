@@ -19,7 +19,7 @@ export class ConnectComponent implements OnInit {
   constructor(
     private _chatService: ChatService,
     private _formBuilder: FormBuilder,
-    private _router: Router
+    public _router: Router
   ) { }
 
   ngOnInit() {
