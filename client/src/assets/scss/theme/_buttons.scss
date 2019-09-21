@@ -1,0 +1,24 @@
+.btn {
+  padding: 1rem;
+  color: $white;
+  font-size: 1.2rem;
+
+
+  &.btn-primary {
+    background: $primary;
+    border: 1px solid darken($primary, 10%);
+
+    &:hover {
+      background: darken($primary, 10%);
+    }
+  }
+
+  &.btn-info {
+    background: $info;
+    border: 1px solid darken($info, 10%);
+
+    &:hover {
+      background: darken($info, 10%);
+    }
+  }
+}

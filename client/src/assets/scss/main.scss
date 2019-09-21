@@ -1,0 +1,28 @@
+@import 'theme/variables';
+@import 'theme/buttons';
+@import 'theme/chatroom';
+@import 'theme/forms';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $black;
+}
+
+html {
+  font-size: 16px;
+  font-family: $font-family-sans-serif;
+}
+
+body {
+  background: $white;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
