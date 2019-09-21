@@ -1,0 +1,6 @@
+<form [formGroup]="form" (ngSubmit)="send(form.value)" novalidate>
+  <div class="form-group form-group-inline">
+    <input type="text" class="form-control form-control-lg" formControlName="message" />
+    <button class="btn btn-info" role="button" type="submit" [disabled]="form.invalid">Send</button>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+.connect-container {
+  width: 100%;
+  height: 100vh;
+  background: lighten(#efefef, 5%);
+  display: flex;
+  flex-direction: column;
+
+  .connect-panel {
+    border: 1px solid #efefef;
+    padding: 4rem;
+    margin: auto;
+    background: $white;
+    display: flex;
+    flex-direction: column;
+
+    img {
+      margin: auto;
+      margin-bottom: 2rem;
+      width: 128px;
+      height: 128px;
+      border-radius: 72px;
+      border: 1px solid #efefef;
+    }
+  }
+}

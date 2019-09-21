@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ChatMessage } from 'src/app/shared/models/chat-message.model';
+import { ChatService } from 'src/app/core/services/chat.service';
+import { ChatUser } from 'src/app/shared/models/chat-user.model';
 
 @Component({
   selector: 'app-chat-room',
@@ -6,10 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-room.component.scss']
 })
 export class ChatRoomComponent implements OnInit {
+  
+  public user: ChatUser;
+  public users: Observable<ChatUser[]>;
+  public messages: ChatMessage[] = [];
 
-  constructor() { }
+  constructor(
+    private _chatService: ChatService
+  ) { }
 
   ngOnInit() {
+    this._chatService.user.subscribe(user => this.user = user);
+    this.users = this._chatService.users;
+    this._chatService.message.subscribe(message => this.messages.push(message));
   }
 
 }

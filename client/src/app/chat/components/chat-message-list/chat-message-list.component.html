@@ -1,7 +1,5 @@
-<ul>
-  <li><app-chat-message></app-chat-message></li>
-  <li><app-chat-message></app-chat-message></li>
-  <li><app-chat-message></app-chat-message></li>
-  <li><app-chat-message></app-chat-message></li>
-  <li><app-chat-message></app-chat-message></li>
+<ul *ngIf="messages">
+  <ng-container *ngFor="let message of messages">
+    <li><app-chat-message [message]="message"></app-chat-message></li>
+  </ng-container>
 </ul>
