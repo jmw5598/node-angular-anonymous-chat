@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ChatMessage } from 'src/app/shared/models/chat-message.model';
 import { ChatService } from 'src/app/core/services/chat.service';
 import { ChatUser } from 'src/app/shared/models/chat-user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-room',
@@ -16,13 +17,19 @@ export class ChatRoomComponent implements OnInit {
   public messages: ChatMessage[] = [];
 
   constructor(
-    private _chatService: ChatService
+    private _chatService: ChatService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
     this._chatService.user.subscribe(user => this.user = user);
     this._chatService.users.subscribe(users => this.users = users);
     this._chatService.message.subscribe(message => this.messages.push(message));
+  }
+
+  disconnect() {
+    this._chatService.disconnect();
+    this._router.navigate(['connect']);
   }
 
 }

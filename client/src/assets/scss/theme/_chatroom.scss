@@ -52,18 +52,9 @@
 
     .chat-message {
       margin: 1rem;
-      width: 60%;
+      flex-grow: 1;
       display: flex;
       flex-direction: row;
-    
-      .chat-message-user {
-        margin: 0.5rem 1rem 1rem 0;
-        .chat-message-user-avatar {
-          width: 36px;
-          height: 36px;
-          border-radius: 32px;
-        }
-      }
 
       .chat-message-content {
         position: relative;
@@ -74,16 +65,52 @@
         color: $gray-800;
 
         &:before {
-          content: '';
-          width: 16px;
-          height: 16px;
-          border-radius: 3px;
-          display: inline-block;
-          position: absolute;
-          background: inherit;
-          top: 16px;;
-          left: -6px;;
-          transform: rotate(45deg);
+            content: '';
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: inline-block;
+            position: absolute;
+            background: inherit;
+            top: 16px;
+            transform: rotate(45deg);
+          }
+      }
+
+      .chat-message-user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 32px;
+      }
+
+      &.chat-message-right {
+        flex-direction: row-reverse;
+        align-items: flex-end;
+
+        .chat-message-user {
+          margin: 0.5rem 0 1rem 1rem;
+          align-self: flex-start;
+        }
+
+        .chat-message-content {
+          &:before {
+            right: -6px;;
+          }
+        }
+      }
+
+      &.chat-message-left {
+        flex-direction: row;
+        align-items: flex-start;
+
+        .chat-message-user {
+          margin: 0.5rem 1rem 1rem 0;
+        }
+
+        .chat-message-content {
+          &:before {
+            left: -6px;;
+          }
         }
       }
     }

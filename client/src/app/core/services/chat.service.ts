@@ -36,6 +36,12 @@ export class ChatService {
     this._setupSocket();
   }
 
+  disconnect() {
+    console.log('disconnecting');
+    localStorage.clear();
+    this._socket.disconnect();
+  }
+
   send(message: ChatMessage) {
     this._socket.emit('message', message);
   }

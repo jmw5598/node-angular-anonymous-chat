@@ -1,10 +1,16 @@
 <div class="chat-room">
   <div class="chat-user-list">
     <app-chat-user-list [users]="users"></app-chat-user-list>
+    <div class="disconnect">
+      <button role="button" type="button" class="btn btn-danger" (click)="disconnect()">Disconnect</button>
+    </div>
   </div>
   <div class="chat-message-list">
     <div>
-    <app-chat-message-list [messages]="messages"></app-chat-message-list>
+      <app-chat-message-list 
+          [messages]="messages"
+          [user]="user">
+      </app-chat-message-list>
     </div>
     <div class="chat-message-input">
       <app-chat-message-form></app-chat-message-form>
