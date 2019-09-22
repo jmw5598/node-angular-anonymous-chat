@@ -1,5 +1,5 @@
 <div class="chat-user">
-  <img class="chat-user-avatar" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png">
+  <img class="chat-user-avatar" [ngStyle]="{ 'border-color': user.color ? user.color : '#efefef' }" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png">
   <div class="chat-user-details">
     <h4>{{ user.name }}</h4>
     <p>{{ user.id }}</p>

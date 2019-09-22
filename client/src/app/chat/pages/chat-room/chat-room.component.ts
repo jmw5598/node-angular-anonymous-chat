@@ -22,7 +22,7 @@ export class ChatRoomComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._chatService.user.subscribe(user => this.user = user);
+    this._chatService.user.subscribe(user => this.user = Object.assign({}, user));
     this._chatService.users.subscribe(users => this.users = users);
     this._chatService.message.subscribe(message => this.messages.push(message));
   }

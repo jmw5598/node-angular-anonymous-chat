@@ -32,8 +32,9 @@ export class ChatService {
         query: { user: JSON.stringify(user) } }
       };
     this._socket = new Socket(config);
-    localStorage.setItem('user', JSON.stringify(user));
     this._setupSocket();
+    this._userSource.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   disconnect() {

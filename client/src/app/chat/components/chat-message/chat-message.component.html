@@ -1,5 +1,4 @@
-<div 
-    *ngIf="message" 
+<div *ngIf="message"
     class="chat-message" 
     [ngClass]="{'chat-message-right' : user.id === message.user.id, 
                 'chat-message-left' : user.id !== message.user.id }">

@@ -30,8 +30,14 @@ export class ConnectComponent implements OnInit {
 
   connect(user: ChatUser) {
     user.id = uuid();
+    //user.color = this._generateRandomColor();
     this._chatService.connect(user);
     this._router.navigate(['chat']);
+  }
+
+  private _generateRandomColor(): string {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
   }
 
 }
