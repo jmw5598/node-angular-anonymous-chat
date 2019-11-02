@@ -3,6 +3,10 @@
     <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" />
     <form [formGroup]="form" class="connect-form" (ngSubmit)="connect(this.form.value)" novalidate>
       <div class="form-group">
+        <span class="room-random" (click)="generateRoom()">Generate random room id</span>
+        <input type="text" class="form-control" placeholder="Room" formControlName="room" />
+      </div>
+      <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" formControlName="name" />
       </div>
       <div class="form-group">

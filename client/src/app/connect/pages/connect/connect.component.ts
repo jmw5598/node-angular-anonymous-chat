@@ -24,15 +24,25 @@ export class ConnectComponent implements OnInit {
 
   ngOnInit() {
     this.form = this._formBuilder.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      room: ['', [Validators.required]]
     });
   }
 
-  connect(user: ChatUser) {
-    user.id = uuid();
-    //user.color = this._generateRandomColor();
-    this._chatService.connect(user);
+  connect(form: any) {
+    const room = form.room;
+    const user: ChatUser = { 
+      id: uuid(), 
+      name: form.name, 
+      color: this._generateRandomColor() 
+    };
+
+    this._chatService.connect(user, room);
     this._router.navigate(['chat']);
+  }
+
+  generateRoom() {
+    this.form.patchValue({ room: uuid() });
   }
 
   private _generateRandomColor(): string {

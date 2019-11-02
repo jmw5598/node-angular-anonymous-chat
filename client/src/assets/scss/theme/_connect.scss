@@ -21,5 +21,16 @@
       border-radius: 72px;
       border: 1px solid #efefef;
     }
+
+    .room-random {
+      margin: 0 0 1rem 0;
+      padding: 0.5rem;
+      background: #efefef;
+      width: 100%;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: gray;
+      text-align: center;
+    }
   }
 }

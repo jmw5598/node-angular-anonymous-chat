@@ -19,21 +19,24 @@ export class ChatService {
   public message: Observable<ChatMessage> = this._messageSource.asObservable();
 
   constructor() {
-    const user: ChatUser = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
+    const room: string = localStorage.getItem('room');
+    const user: ChatUser = JSON.parse(localStorage.getItem('user'));
+    
     this._userSource.next(user);
-    if (user) this.connect(user);
+    if (user && room) this.connect(user, room);
   }
 
-  connect(user: ChatUser) {
+  connect(user: ChatUser, room: string) {
     const config: SocketIoConfig = { 
-      url: 'http://192.168.1.46:3000', 
+      url: 'http://localhost:3000', 
       options: { 
-        query: { user: JSON.stringify(user) } }
-      };
+        query: { user: JSON.stringify(user), room: room } 
+      }
+    };
     this._socket = new Socket(config);
     this._setupSocket();
     this._userSource.next(user);
+    localStorage.setItem('room', room);
     localStorage.setItem('user', JSON.stringify(user));
   }
 
