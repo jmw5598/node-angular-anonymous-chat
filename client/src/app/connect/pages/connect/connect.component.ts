@@ -34,7 +34,7 @@ export class ConnectComponent implements OnInit {
     const user: ChatUser = { 
       id: uuid(), 
       name: form.name, 
-      color: this._generateRandomColor() 
+      color: ''//this._generateRandomColor() 
     };
 
     this._chatService.connect(user, room);
