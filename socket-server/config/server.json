@@ -1,7 +1,7 @@
 {
   "development": {
     "env": "dev",
-    "hostname": "192.168.1.46",
+    "hostname": "localhost",
     "port": "3000",
     "viewDir": "./app/views",
     "staticDir": "./app/public"
