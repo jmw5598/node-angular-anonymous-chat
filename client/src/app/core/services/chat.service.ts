@@ -4,11 +4,14 @@ import { SocketIoConfig, Socket } from 'ngx-socket-io';
 import { ChatUser } from 'src/app/shared/models/chat-user.model';
 import { ChatMessage } from 'src/app/shared/models/chat-message.model';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
+  private _socketUrl: string = environment.socketUrl;
   private _socket: Socket;
   private _userSource: BehaviorSubject<ChatUser> = new BehaviorSubject<ChatUser>(null);
   private _usersSource: BehaviorSubject<ChatUser[]> = new BehaviorSubject<ChatUser[]>([]);
@@ -28,7 +31,7 @@ export class ChatService {
 
   connect(user: ChatUser, room: string) {
     const config: SocketIoConfig = { 
-      url: 'http://localhost:3000', 
+      url: 'https://qwkchat.herokuapp.com/', 
       options: { 
         query: { user: JSON.stringify(user), room: room } 
       }
