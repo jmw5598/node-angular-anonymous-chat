@@ -31,7 +31,7 @@ class Server {
     this.server.use(cookieParser());
     this.server.use(express.static(config.staticDir));
 
-    this.server.use('/', router);
+    this.server.use('/chat', router);
 
     this.server.use((req, res, next) => {
       next(createError(404));
@@ -40,14 +40,14 @@ class Server {
     this.server.use((err, req, res, next) => {
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'dev' ? err : {};
-      res.status(err.status || 500);
-      res.render('error');
+      res.status(err.status || 500).send(err);
+      //res.render('error');
     });
   }
 
   start() {
     let hostname = this.server.get('hostname');
-    let port = this.server.get('port');
+    let port = process.env.PORT || this.server.get('port');
     this.http = this.server.listen(port, () => {
       console.log('Express server listening on - http://' + hostname + ':' + port);
     });

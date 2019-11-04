@@ -23,7 +23,10 @@ class ConnectionMapping {
   }
 
   getUsers(roomId) {
-    return [...this.rooms[roomId]];
+    if (this.rooms.hasOwnProperty(roomId))
+      return [...this.rooms[roomId]];
+    else
+      return [];
   }
 
 }
