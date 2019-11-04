@@ -1,6 +1,6 @@
 <div class="chat-room">
-  <div class="chat-user-list">
-    <div class="mobile-toggler">
+  <div class="chat-user-list hidden" [ngClass]="{ 'show' : showMobileMenu }">
+    <div class="mobile-toggler" (click)="toggle()">
       <div class="toggler">
         <div></div>
         <div></div>
@@ -8,7 +8,7 @@
       </div>
     </div>
     <app-chat-user-list [users]="users"></app-chat-user-list>
-    <div class="chat-user-item disconnect">
+    <div class="disconnect">
       <button role="button" type="button" class="btn btn-danger" (click)="disconnect()">Disconnect</button>
     </div>
   </div>

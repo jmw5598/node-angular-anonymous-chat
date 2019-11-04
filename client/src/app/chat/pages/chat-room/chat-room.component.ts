@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener,  } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChatMessage } from 'src/app/shared/models/chat-message.model';
 import { ChatService } from 'src/app/core/services/chat.service';
@@ -16,6 +16,8 @@ export class ChatRoomComponent implements OnInit {
   public users: ChatUser[];
   public messages: ChatMessage[] = [];
 
+  public showMobileMenu: boolean = false;
+
   constructor(
     private _chatService: ChatService,
     private _router: Router
@@ -30,6 +32,20 @@ export class ChatRoomComponent implements OnInit {
   disconnect() {
     this._chatService.disconnect();
     this._router.navigate(['connect']);
+  }
+
+  toggle() {
+    this.showMobileMenu = !this.showMobileMenu;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const width: number = event.target.innerWidth;
+    if (width > 835)
+      this.showMobileMenu = true;
+    else
+      this.showMobileMenu = false;
+
   }
 
 }

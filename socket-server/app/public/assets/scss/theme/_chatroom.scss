@@ -145,6 +145,23 @@
 
 }
 
+.hidden > app-chat-user-list > ul,
+.hidden > .disconnect {
+  display: none !important;
+}
+
+.show > app-chat-user-list > ul,
+.show > .disconnect {
+  display: block !important;
+}
+
+@media screen and (min-width: 836px) {
+  .hidden > app-chat-user-list > ul,
+  .hidden > .disconnect {
+    display: block !important;
+  }
+}
+
 @media screen and (max-width: 835px) {
   .chat-room {
     display: flex;
@@ -178,10 +195,6 @@
 
     .chat-user-list {
       width: 100%;
-
-      .chat-user-item {
-        display: none;
-      }
       
       .disconnect {
         position: static;
@@ -204,5 +217,15 @@
       }
     }
 
+  }
+
+  .hidden > app-chat-user-list > ul,
+  .hidden > .disconnect {
+    display: none !important;
+  }
+
+  .show > app-chat-user-list > ul,
+  .show > .disconnect {
+    display: block !important;
   }
 }
