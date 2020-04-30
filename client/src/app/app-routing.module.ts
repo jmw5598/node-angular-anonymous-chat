@@ -7,12 +7,12 @@ const routes: Routes = [
   {
     path: 'chat',
     canActivate: [ConnectedGuard],
-    loadChildren: './chat/chat.module#ChatModule'
+    loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
   },
   {
     path: 'connect',
     canActivate: [DisconnectedGuard],
-    loadChildren: './connect/connect.module#ConnectModule'
+    loadChildren: () => import('./connect/connect.module').then(m => m.ConnectModule)
   },
   {
     path: '**',
