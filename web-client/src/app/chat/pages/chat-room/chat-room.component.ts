@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener,  } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChatMessage } from 'src/app/shared/models/chat-message.model';
 import { ChatService } from 'src/app/core/services/chat.service';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat-room.component.scss']
 })
 export class ChatRoomComponent implements OnInit {
+  @ViewChild('messageList') 
+  private messageListContainer: ElementRef;
   
   public user: ChatUser;
   public users: ChatUser[];
@@ -29,6 +31,10 @@ export class ChatRoomComponent implements OnInit {
     this._chatService.message.subscribe(message => this.messages.push(message));
   }
 
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  } 
+
   disconnect() {
     this._chatService.disconnect();
     this._router.navigate(['connect']);
@@ -38,6 +44,12 @@ export class ChatRoomComponent implements OnInit {
     this.showMobileMenu = !this.showMobileMenu;
   }
 
+  scrollToBottom(): void {
+      try {
+          this.messageListContainer.nativeElement.scrollTop = this.messageListContainer.nativeElement.scrollHeight;
+      } catch(err) { }                 
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     const width: number = event.target.innerWidth;
@@ -45,7 +57,5 @@ export class ChatRoomComponent implements OnInit {
       this.showMobileMenu = true;
     else
       this.showMobileMenu = false;
-
   }
-
 }

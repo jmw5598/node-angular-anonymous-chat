@@ -9,8 +9,8 @@ class SocketServer {
     this.users = [];
   }
 
-  setup(http) {
-    this.socket = io(http);
+  setup(http, config) {
+    this.socket = io(http, config);
     this.rooms = ConnectionMapping;
   }
 

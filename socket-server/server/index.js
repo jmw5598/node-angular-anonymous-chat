@@ -6,7 +6,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const https = require('https');
+const https = require('http');
 
 const router = require('./routes');
 const socketServer = require('./sockets');
@@ -50,15 +50,22 @@ class Server {
   start() {
     let hostname = this.server.get('hostname');
     let port = process.env.PORT || this.server.get('port');
+    let env = this.server.get('evn');
 
-    this.http = https.createServer({
-      key: fs.readFileSync('server.key'),
-      cert: fs.readFileSync('server.cert')
-    }, this.server).listen(port, () => {
-      console.log('Express server listening on - https://' + hostname + ':' + port);
-    })
-
-    this.socket.setup(this.http);
+    if (env === 'dev') {
+      this.http = https.createServer({
+        key: fs.readFileSync('server.key'),
+        cert: fs.readFileSync('server.cert')
+      }, this.server).listen(port, () => {
+        console.log('Express server listening on - https://' + hostname + ':' + port);
+      })
+    } else {
+      this.http = this.server.listen(port, () => {
+        console.log('Express server listening on - http://' + hostname + ':' + port);
+      });
+    }
+    
+    this.socket.setup(this.http, { secure: true });
     this.socket.start();
   }
 

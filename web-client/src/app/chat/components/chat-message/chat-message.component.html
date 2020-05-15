@@ -3,9 +3,9 @@
     [ngClass]="{'chat-message-right' : user.id === message.user.id, 
                 'chat-message-left' : user.id !== message.user.id }">
   <div class="chat-message-user">
-    <img class="chat-message-user-avatar" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png">
+    <img class="chat-message-user-avatar" src="assets/images/avatar.png">
   </div>
-  <div class="chat-message-content">
+  <div class="chat-message-container">
     <p>{{ message.message }}</p>
     <span>{{ message?.timestamp | date:'short'}} ({{ message?.user?.name }})</span>
   </div>

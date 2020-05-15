@@ -7,12 +7,14 @@
         <div></div>
       </div>
     </div>
-    <app-chat-user-list [users]="users"></app-chat-user-list>
+    <div class="user-list">
+      <app-chat-user-list [users]="users"></app-chat-user-list>
+    </div>
     <div class="disconnect">
       <button role="button" type="button" class="btn btn-danger" (click)="disconnect()">Disconnect</button>
     </div>
   </div>
-  <div class="chat-message-list">
+  <div #messageList class="chat-message-list">
     <div class="chat-message-content">
       <app-chat-message-list 
           [messages]="messages"

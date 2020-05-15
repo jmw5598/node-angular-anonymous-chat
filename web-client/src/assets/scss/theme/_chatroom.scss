@@ -1,9 +1,7 @@
 .chat-room {
   display: flex;
   flex-direction: row;
-  background: #efefef;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100vh;
 
   .chat-user-list {
     flex: 0 0 auto;
@@ -62,29 +60,39 @@
 
   .chat-message-list {
     background: #efefef;
-    flex: 1 0 auto;
-    align-self: flex-end;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    
 
-    ul {
-      height: 100%;
-      overflow-y: hidden;
-    }
-
-    .chat-message {
-      margin: 1rem;
+    .chat-message-content {
       flex-grow: 1;
       display: flex;
-      flex-direction: row;
+      flex-flow: column nowrap;
+      justify-content: flex-end;
 
-      .chat-message-content {
-        position: relative;
-        padding: 1rem;
-        width: 60%;
-        border-radius: 3px;
-        background: #FFFFFF;
-        color: $gray-800;
+      .chat-message {
+        margin: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
 
-        &:before {
+        .chat-message-container {
+          position: relative;
+          padding: 1rem;
+          width: 60%;
+          border-radius: 3px;
+          background: #FFFFFF;
+          color: $gray-800;
+
+          span {
+            color: $gray-600;
+            font-size: 0.8rem;
+            font-style: italic;
+          }
+
+          &:before {
             content: '';
             width: 16px;
             height: 16px;
@@ -95,54 +103,64 @@
             top: 16px;
             transform: rotate(45deg);
           }
-      }
-
-      .chat-message-user-avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 32px;
-      }
-
-      &.chat-message-right {
-        flex-direction: row-reverse;
-        align-items: flex-end;
-
-        .chat-message-user {
-          margin: 0.5rem 0 1rem 1rem;
-          align-self: flex-start;
         }
 
-        .chat-message-content {
-          &:before {
-            right: -6px;;
+        .chat-message-user-avatar {
+          width: 36px;
+          height: 36px;
+          border-radius: 32px;
+        }
+
+        &.chat-message-right {
+          flex-direction: row-reverse;
+          align-items: flex-end;
+
+          .chat-message-user {
+            margin: 0.5rem 0 1rem 1rem;
+            align-self: flex-start;
+          }
+
+          .chat-message-container {
+            &:before {
+              right: -6px;;
+            }
           }
         }
-      }
 
-      &.chat-message-left {
-        flex-direction: row;
-        align-items: flex-start;
+        &.chat-message-left {
+          flex-direction: row;
+          align-items: flex-start;
 
-        .chat-message-user {
-          margin: 0.5rem 1rem 1rem 0;
-        }
+          .chat-message-user {
+            margin: 0.5rem 1rem 1rem 0;
+          }
 
-        .chat-message-content {
-          &:before {
-            left: -6px;;
+          .chat-message-container {
+            &:before {
+              left: -6px;;
+            }
           }
         }
       }
     }
-  }
 
-  .chat-message-input {
-    flex-basis: 100%;
-    padding: 1rem;
-    background: lighten(#efefef, 2%);
-    border-top: 1px solid darken(#efefef, 10%);
+    .chat-message-input {
+      flex-basis: 0;
+      padding: 1rem;
+      border-top: 1px solid #d6d5d5;
+      background: #f4f4f4;
+      position: sticky;
+      bottom: 0;
+    }
   }
+}
 
+.chat-user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 96px;
+  border: 2px solid #efefef;
+  margin-right: 1rem;
 }
 
 .hidden > app-chat-user-list > ul,
@@ -159,6 +177,20 @@
   .hidden > app-chat-user-list > ul,
   .hidden > .disconnect {
     display: block !important;
+  }
+}
+
+@media screen and (max-width: 478px) {
+  .chat-room {
+    .chat-message-list {
+      .chat-message-content {
+        .chat-message {
+          .chat-message-container {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -222,6 +254,14 @@
   .hidden > app-chat-user-list > ul,
   .hidden > .disconnect {
     display: none !important;
+  }
+
+  .hidden > .user-list {
+    display: none;
+  }
+
+  .show > .user-list {
+    display: block;
   }
 
   .show > app-chat-user-list > ul,
